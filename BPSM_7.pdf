@@ -1,0 +1,115 @@
+🧬 BPSM07 — Bioinformatic Web: Command-Line & Web Tools Cheat Sheet
+🌐 Overview
+
+This module introduces bioinformatics web technologies, online databases, and command-line tools used to automate biological data retrieval and analysis.
+
+Core goals:
+
+Learn how to use NCBI, EBI, and EMBOSS web services
+
+Perform multiple sequence alignment and motif analysis
+
+Retrieve biological data programmatically via NCBI E-utilities
+
+Integrate scripts and web tools into a simple web interface
+
+🧩 Major Web Resources
+Category	Resource	URL	Description
+NCBI	NCBI
+	Main US bioinformatics portal — sequence retrieval, BLAST, taxonomy	
+EBI	EBI
+	European Bioinformatics Institute, includes UniProt, Ensembl, InterPro	
+UniProt	https://www.uniprot.org
+	Comprehensive protein sequence and functional annotation	
+Clustal Omega	https://www.ebi.ac.uk/Tools/msa/clustalo/
+	Multiple sequence alignment	
+EMBOSS	https://www.ebi.ac.uk/Tools/emboss/
+	Suite of sequence analysis tools	
+NCBI E-utilities	https://www.ncbi.nlm.nih.gov/books/NBK25500/
+	Command-line access to NCBI databases via esearch, efetch, elink, etc.	
+🧠 Key Concepts
+🔹 Databases
+
+Primary databases: store raw data (GenBank, UniProtKB/TrEMBL)
+
+Secondary databases: curated or derived (RefSeq, Pfam, InterPro)
+
+Tertiary databases: integrative or knowledge-based (KEGG, Reactome)
+
+🔹 Data Formats
+
+FASTA — sequence data
+
+GenBank — annotated nucleotide records
+
+GFF / BED — genome feature annotations
+
+XML / JSON — structured data for web and APIs
+
+🧬 NCBI E-utilities Cheatsheet
+Tool	Description	Example Command
+esearch	Search a database	esearch -db nucleotide -query "BRCA1[Gene]"
+efetch	Retrieve records in a given format	efetch -db nucleotide -id NM_007294 -format fasta
+esummary	Get metadata summary	`esearch -db protein -query insulin
+elink	Find linked data between databases	elink -dbfrom gene -db protein -id 672
+xtract	Extract specific fields	`efetch -db gene -id 672 -format xml
+entrez-direct install	Setup	conda install -c bioconda entrez-direct
+🔧 EMBOSS Tools
+Tool	Purpose	Example
+seqret	Convert file formats	seqret -sequence seq.gb -outseq seq.fasta
+transeq	Translate nucleotide to protein	transeq dna.fasta prot.fasta
+patmatmotifs	Search for motifs via PROSITE	patmatmotifs protein.fasta motifs.txt
+needle / water	Pairwise sequence alignment	needle seq1.fasta seq2.fasta
+getorf	Find open reading frames	getorf genome.fasta orfs.fasta
+🧩 Clustal Omega (Multiple Sequence Alignment)
+Web Usage
+
+Upload FASTA → select parameters → run → download aligned FASTA or guide tree.
+
+Command Line
+clustalo -i input.fasta -o aligned.fasta --outfmt=fa --threads=4 --force
+
+Output Formats
+
+--outfmt=clu → Clustal
+
+--outfmt=fa → FASTA
+
+--outfmt=msf → MSF
+
+--outfmt=phy → Phylip
+
+🔄 Typical Workflow Example
+# 1️⃣ Search for a gene of interest
+esearch -db nucleotide -query "glucose-6-phosphatase[Gene]" > ids.txt
+
+# 2️⃣ Retrieve FASTA sequences
+efetch -db nucleotide -format fasta -id U49845,AB035609 > g6pc.fasta
+
+# 3️⃣ Align sequences
+clustalo -i g6pc.fasta -o g6pc_aligned.fasta --outfmt=fa --force
+
+# 4️⃣ Analyse motifs
+patmatmotifs g6pc_aligned.fasta motifs_results.txt
+
+🧮 Output Interpretation
+Step	Output	Description
+esearch	XML/IDs	Accession list
+efetch	FASTA/GenBank	Raw sequence data
+clustalo	FASTA	Aligned sequences
+patmatmotifs	Text	Motif matches with E-values
+💻 Optional: Web Integration (PHP/Python Example)
+PHP
+<?php
+$gene = $_GET['gene'];
+$cmd = "esearch -db nucleotide -query '$gene' | efetch -format fasta";
+$output = shell_exec($cmd);
+echo "<pre>$output</pre>";
+?>
+
+Python
+from Bio import Entrez
+Entrez.email = "you@example.com"
+handle = Entrez.esearch(db="nucleotide", term="BRCA1")
+record = Entrez.read(handle)
+print(record["IdList"])
