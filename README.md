@@ -1,23 +1,30 @@
-# 🧬 BPSM Coursework – Linux, Bash, AWK, Python & Git Practice
+# BPSM_Scripting_Tools
 
-This repository contains a collection of executable scripts and cheat sheets developed as part of the **Bioinformatics Practical and Systems Management (BPSM)** coursework at the **University of Edinburgh (MSc Bioinformatics)**.  
-Each file demonstrates key command-line, scripting, and data-processing skills essential for modern bioinformatics workflows.
+Practical Linux, Bash, AWK, Python, Git, and HPC scripting exercises developed for MSc Bioinformatics systems training.
 
----
+## Objective
+Build operational command-line proficiency for real-world bioinformatics workflows: data parsing, automation, job submission, and reproducible scripting habits.
 
-## 📂 Repository Contents
+## Included Skills
+- Bash control flow and scripting patterns
+- Text processing with AWK
+- Basic Python scripting for data handling
+- BLAST command-line usage and result filtering
+- Linux shell fluency and file-system operations
+- Git command workflow essentials
+- HPC execution concepts (Eddie job usage notes)
 
-| File | Description |
-|------|--------------|
-| `BPSM_7.pdf` | Module guide / practical handout (reference document) |
-| `bash_loops.sh` | Examples of `for`, `while`, and `until` loops in Bash |
-| `bash_to_awk.sh` | Combined Bash–AWK workflow for text parsing |
-| `bash_variables.sh` | Using variables, arrays, and arguments in Bash |
-| `blast.sh` | Example BLAST command-line usage with local database |
-| `eddie.sh` | Eddie HPC submission and job-management cheat sheet |
-| `git_cheatsheet.md` | Git command summary and workflow guide |
-| `good_or_bad_BLAST.sh` | Filtering BLAST results by E-value and identity |
-| `linux_practise.sh` | Basic Linux commands for navigation, search, and redirection |
-| `myawkscript.awk` | AWK program for data summarisation and filtering |
-| `process_people_data.sh` | Bash script to parse and clean structured tabular data |
-| `python.py` | Simple Python script for parsing input and printing output |
+## Repository Contents
+Representative files include:
+- loop/variable scripting examples (`bash_loops.sh`, `bash_variables.sh`)
+- Bash↔AWK integration (`bash_to_awk.sh`, `myawkscript.awk`)
+- BLAST examples and post-processing (`blast.sh`, `good_or_bad_BLAST.sh`)
+- HPC cheat sheet (`eddie.sh`)
+- Git usage notes (`git_cheatsheet.md`)
+
+## Career Relevance
+This repository highlights foundational systems skills required by bioinformatics roles:
+- Unix-first working style
+- script-based automation
+- reliable command-line data processing
+- environment readiness for pipeline and HPC work
